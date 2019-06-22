@@ -1,4 +1,4 @@
-# mdtable
+# :clipboard: mdtable
 
 ![PyPI](https://img.shields.io/pypi/v/mdtable.svg?style=flat-square)
 ![License](https://img.shields.io/github/license/mzjp2/mdtable.svg?style=flat-square)
