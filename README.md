@@ -25,6 +25,7 @@ The options available are:
 --quotechar  TEXT  Quote character in csv
 --escapechar TEXT  Escape character in csv
 --writemode  TEXT  Python write mode, e.g w+, w, a, a+
+--version          Show the version and exit.
 --help             Show this message and exit.
 ```
 
@@ -64,6 +65,8 @@ which looks like:
 | Kiseki Hirakawa   | Human Resources | February       |
 
 ### API
+
+[*soon*] more documentation
 
 **Example**:
 
