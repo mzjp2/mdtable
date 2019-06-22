@@ -1,7 +1,7 @@
 """This implements the command line interface for mdtable"""
 import click
 
-from mdtable.mdtable import MDTable, handle_aligns
+from mdtable.mdtable import MDTable, handle_aligns, __version__
 
 
 @click.command()
@@ -12,6 +12,7 @@ from mdtable.mdtable import MDTable, handle_aligns
 @click.option("--quotechar", help="Quote character in csv", default='"')
 @click.option("--escapechar", help="Escape character in csv", default="")
 @click.option("--writemode", help="Python write mode, e.g w+, w, a, a+", default="w")
+@click.version_option(version=__version__)
 def main(
     input_file, aligns, save, delimiter, quotechar, escapechar, writemode
 ):  # pylint: disable=missing-docstring, too-many-arguments
