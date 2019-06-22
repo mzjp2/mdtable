@@ -80,9 +80,9 @@ markdown.save_table('out.csv')
 
 ### Current Features
 
-- Ability to specify alignments, by providing a comma seperated string of alignments values (either 'l', 'r' or 'c') to ``mdtables —aligns [ALIGNS] INPUT_FILE``, say for example ``mdtables —aligns c,c,l input.csv``, there must be as many alignments characters as there are tables.
-- Ability to save output to a markdown file (and specify the writing mode) by providing the path to the file you wish to save to ``mdtables —save [SAVE_FILE] INPTUT_FILE`` say for example ``mdtables —save output.md input.csv``
-- Provide custom delimiter, quotation and escape characters for reading in your csv file. This is done by providing the character to ``—delimiter, —quotechar, —escapehcar`` respectively.
+- [x] Ability to specify alignments, by providing a comma seperated string of alignments values (either 'l', 'r' or 'c') to ``mdtables —aligns [ALIGNS] INPUT_FILE``, say for example ``mdtables —aligns c,c,l input.csv``, there must be as many alignments characters as there are tables.
+- [x] Ability to save output to a markdown file (and specify the writing mode) by providing the path to the file you wish to save to ``mdtables —save [SAVE_FILE] INPTUT_FILE`` say for example ``mdtables —save output.md input.csv``
+- [x] Provide custom delimiter, quotation and escape characters for reading in your csv file. This is done by providing the character to ``—delimiter, —quotechar, —escapehcar`` respectively.
 
 ## Future Features
 
