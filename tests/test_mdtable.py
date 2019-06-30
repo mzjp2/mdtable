@@ -32,9 +32,7 @@ def test_padding_align_output():
     table = MDTable(INPUT, padding=3, aligns=("c", "r", "l"))
     with open("tests/data/out_padded_align.md", "r") as f:
         OUTPUT = f.read()
-    print(OUTPUT)
-    print(table.get_table())
-    assert OUTPUT != table.get_table()
+    assert OUTPUT == table.get_table()
 
 
 def test_align_validate_length():
@@ -59,6 +57,11 @@ def test_align_validate_input_complicated():
         match="Aligns must be a tuple of 'l', 'r' and 'c' for left, right and centre. Found gdfgsd instead",
     ):
         table = MDTable(INPUT, aligns=("l", "gdfgsd", "f"))
+
+
+def test_align_padding():
+    with pytest.raises(ValueError, match="Cannot use aligns with 0 padding."):
+        table = MDTable(INPUT, padding=0, aligns=("c", "r", "l"))
 
 
 def test_handle_aligns_default():
