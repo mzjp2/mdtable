@@ -36,20 +36,20 @@ class MDTable:
         self,
         filepath: str,
         aligns: tuple = None,
+        padding: int = 1,
         delimiter: str = ",",
         quotechar: str = '"',
         escapechar: str = "",
-        padding: int = "1",
     ):
         """MDTable
 
         Arguments:
             filepath: string pointing to input csv file
             aligns: tuple of alignments, must have same number as number of columns
+            padding: padding to use in raw formatted markdown table
             delimiter: delimiter character in csv
             quotechar: quote character in csv
             escapechar: escape character in csv
-            padding: padding for table border
         """
         self.filepath = filepath
         self.aligns = aligns
@@ -60,6 +60,7 @@ class MDTable:
         self._num_cols = len(self._csv_dict.keys())
         if aligns:
             self._validate_aligns(self.aligns)
+        self._word_length_dict = _get_max_word_per_col(self._csv_dict)
 
     def get_table(self) -> str:
         """Method to return markdown formatted table as string
@@ -102,7 +103,7 @@ class MDTable:
             header: a string of markdown formatted header
             dashes: a string of markdown formatted dashes
         """
-        word_length_dict = self._get_max_word_per_col()
+        word_length_dict = self._word_length_dict
         header = "|"
         dashes = "|"
         for col in range(self._num_cols):
@@ -123,7 +124,7 @@ class MDTable:
     def _prep_body(self) -> str:
         self._prep_header()
         num_rows = len(self._csv_dict[0])
-        word_length_dict = self._get_max_word_per_col()
+        word_length_dict = self._word_length_dict
         for row_num in range(1, num_rows):
             row = "|"
 
@@ -133,20 +134,24 @@ class MDTable:
                 row += " " + word + " " * num_spaces + " |"
             yield row + "\n"
 
-    def _get_max_word_per_col(self) -> dict:
-        """Computes the maximum word lengthin for each column
 
-        Returns:
-            word_length_dict: a dictionary whose keys are column numbers and whose values are the maximum word length for that column
-        """
-        word_length_dict = {}
-        for key in self._csv_dict:
-            max_word_length = 0
-            for val in self._csv_dict[key]:
-                if len(val) > max_word_length:
-                    max_word_length = len(val)
-            word_length_dict[key] = max_word_length
-        return word_length_dict
+def _get_max_word_per_col(csv_dict) -> dict:
+    """Computes the maximum word lengthin for each column
+
+    Arguments:
+        csv_dict: a dictionary whose keys are column numbers and values are column lists
+
+    Returns:
+        word_length_dict: a dictionary whose keys are column numbers and whose values are the maximum word length for that column
+    """
+    word_length_dict = {}
+    for key in csv_dict:
+        max_word_length = 0
+        for val in csv_dict[key]:
+            if len(val) > max_word_length:
+                max_word_length = len(val)
+        word_length_dict[key] = max_word_length
+    return word_length_dict
 
 
 def read_csv(
