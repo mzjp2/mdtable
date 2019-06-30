@@ -73,7 +73,7 @@ def test_save_file_contents():
 def test_get_max_word_col():
     table = MDTable(INPUT)
     correct = {0: 17, 1: 15, 2: 14}
-    assert table._get_max_word_per_col() == correct  # pylint: disable=protected-access
+    assert table._word_length_dict == correct  # pylint: disable=protected-access
 
 
 def test_imports():
