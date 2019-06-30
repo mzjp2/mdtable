@@ -21,6 +21,22 @@ def test_align_output():
     assert OUTPUT == table.get_table()
 
 
+def test_padding_output():
+    table = MDTable(INPUT, padding=3)
+    with open("tests/data/out_padded.md", "r") as f:
+        OUTPUT = f.read()
+    assert OUTPUT == table.get_table()
+
+
+def test_padding_align_output():
+    table = MDTable(INPUT, padding=3, aligns=("c", "r", "l"))
+    with open("tests/data/out_padded_align.md", "r") as f:
+        OUTPUT = f.read()
+    print(OUTPUT)
+    print(table.get_table())
+    assert OUTPUT != table.get_table()
+
+
 def test_align_validate_length():
     with pytest.raises(
         ValueError,
