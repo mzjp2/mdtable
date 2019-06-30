@@ -20,6 +20,9 @@ def main(
     input_file, aligns, padding, save, delimiter, quotechar, escapechar, writemode
 ):  # pylint: disable=missing-docstring, too-many-arguments
     aligns = handle_aligns(aligns)
+    if padding == 0:
+        raise ValueError("0 padding is currently not enabled. Try again later.")
+
     table = MDTable(
         input_file,
         aligns,
