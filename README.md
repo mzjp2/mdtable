@@ -3,6 +3,7 @@
 ![PyPI](https://img.shields.io/pypi/v/mdtable.svg?style=flat-square)
 ![License](https://img.shields.io/github/license/mzjp2/mdtable.svg?style=flat-square)
 [![Code Style: Black](https://img.shields.io/badge/code-black-black.svg?style=flat-square)](https://github.com/ambv/black)
+[![Downloads](https://pepy.tech/badge/mdtable)](https://pepy.tech/project/mdtable)
 
 mdtable is a Python built command line interface that lets you convert csv files into Markdown formatted tables easily. It also provides a Python API to use for your projects.
 
