@@ -2,7 +2,7 @@
 
 import csv
 
-__version__ = "0.1"
+__version__ = "0.2"
 
 
 def handle_aligns(aligns):
@@ -108,16 +108,19 @@ class MDTable:
         dashes = "|"
         for col in range(self._num_cols):
             col_title = self._csv_dict[col][0]
-            num_spaces = word_length_dict[col] - len(col_title)
+            num_spaces = word_length_dict[col] - len(col_title) + self.padding
             num_dashes = word_length_dict[col]
-            header += " " + col_title + " " * num_spaces + " |"
+            header += " " * self.padding + col_title + " " * num_spaces + "|"
+            dashes += " " * (self.padding - 1)
 
             if not self.aligns or self.aligns[col] == "l":
-                dashes += " " + "-" * num_dashes + " |"
+                dashes += " " + "-" * num_dashes + " " * self.padding + "|"
             elif self.aligns[col] == "r":
-                dashes += " " + "-" * num_dashes + ":|"
+                dashes += " " + "-" * num_dashes + ":" + " " * (self.padding - 1) + "|"
             elif self.aligns[col] == "c":
-                dashes += ":-" + "-" * (num_dashes - 1) + ":|"
+                dashes += (
+                    ":-" + "-" * (num_dashes - 1) + ":" + " " * (self.padding - 1) + "|"
+                )
 
         return header + "\n", dashes + "\n"
 
@@ -130,8 +133,8 @@ class MDTable:
 
             for col in range(self._num_cols):
                 word = self._csv_dict[col][row_num]
-                num_spaces = word_length_dict[col] - len(word)
-                row += " " + word + " " * num_spaces + " |"
+                num_spaces = word_length_dict[col] - len(word) + self.padding - 1
+                row += " " * self.padding + word + " " * num_spaces + " |"
             yield row + "\n"
 
 
