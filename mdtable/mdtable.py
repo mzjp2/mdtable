@@ -54,11 +54,13 @@ class MDTable:
         self.filepath = filepath
         self.aligns = aligns
         self.padding = padding
-        self._csv_dict = read_csv(
+        self._csv_dict = _read_csv(
             filepath, delimiter=delimiter, quotechar=quotechar, escapechar=escapechar
         )
         self._num_cols = len(self._csv_dict.keys())
         if aligns:
+            if padding == 0:
+                raise ValueError("Cannot use aligns with 0 padding.")
             self._validate_aligns(self.aligns)
         self._word_length_dict = _get_max_word_per_col(self._csv_dict)
 
@@ -157,7 +159,7 @@ def _get_max_word_per_col(csv_dict) -> dict:
     return word_length_dict
 
 
-def read_csv(
+def _read_csv(
     filepath: str, delimiter: str = ",", quotechar: str = '"', escapechar: str = ""
 ) -> dict:
     """Process a given csv into a python dictionary
