@@ -1,0 +1,4 @@
+[run]
+omit = 
+        mdtable/cli.py
+        mdtable/__main__.py
