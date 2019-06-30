@@ -20,14 +20,15 @@ Run ``pip install mdtable`` and check that the latest version is current install
 The options available are:
 
 ```
--a, --aligns TEXT  Comma seperated list of 'l,r,c'
--s, --save   TEXT  Path to save formatted markdown to
---delimiter  TEXT  Delimiter character in csv
---quotechar  TEXT  Quote character in csv
---escapechar TEXT  Escape character in csv
---writemode  TEXT  Python write mode, e.g w+, w, a, a+
---version          Show the version and exit.
---help             Show this message and exit.
+-a, --aligns TEXT      Comma seperated list of 'l,r,c'
+-p, --padding INTEGER  Padding for raw Markdown Table formatting
+-s, --save TEXT        Path to save formatted markdown to
+--delimiter TEXT       Delimiter character in csv
+--quotechar TEXT       Quote character in csv
+--escapechar TEXT      Escape character in csv
+--writemode TEXT       Python write mode, e.g w+, w, a, a+
+--version              Show the version and exit.
+--help                 Show this message and exit.
 ```
 
 **Example**:
@@ -82,11 +83,28 @@ markdown.save_table('out.csv')
 ### Current Features
 
 - [x] Ability to specify alignments, by providing a comma seperated string of alignments values (either 'l', 'r' or 'c') to ``mdtables —aligns [ALIGNS] INPUT_FILE``, say for example ``mdtables —aligns c,c,l input.csv``, there must be as many alignments characters as there are tables.
+
 - [x] Ability to save output to a markdown file (and specify the writing mode) by providing the path to the file you wish to save to ``mdtables —save [SAVE_FILE] INPTUT_FILE`` say for example ``mdtables —save output.md input.csv``
+
 - [x] Provide custom delimiter, quotation and escape characters for reading in your csv file. This is done by providing the character to ``—delimiter, —quotechar, —escapehcar`` respectively.
+
+- [x] Add a padding option to make table border padding customisable (in the raw output). This can now be done. Running `mdtable input.csv -p 3 ` returns
+
+  ```
+  |   Name                |   Department        |   Birthday Month   |
+  |   -----------------   |   ---------------   |   --------------   |
+  |   John Smith          |   Accounting        |   November         |
+  |   Erica Meyers        |   IT                |   March            |
+  |   Zain Patel          |   Engineering       |   June             |
+  |   Christopher Smith   |   Engineering       |   July             |
+  |   Kiseki Hirakawa     |   Human Resources   |   February         |
+  ```
+
+- [ ] 
 
 ## Future Features
 
-- [ ] Implement a raw centering flag to prettify the output if required
-- [ ] Add a padding option to make table border padding customisable
+- [ ] Implement a centering flag (for raw output) to prettify the output if required
+- [ ] Enable 0 padding
 - [ ] Add documentation for the API
+- [ ] Implement tests for `delimeters``, quotechars` and `escapechars`.

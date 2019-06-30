@@ -21,6 +21,20 @@ def test_align_output():
     assert OUTPUT == table.get_table()
 
 
+def test_padding_output():
+    table = MDTable(INPUT, padding=3)
+    with open("tests/data/out_padded.md", "r") as f:
+        OUTPUT = f.read()
+    assert OUTPUT == table.get_table()
+
+
+def test_padding_align_output():
+    table = MDTable(INPUT, padding=3, aligns=("c", "r", "l"))
+    with open("tests/data/out_padded_align.md", "r") as f:
+        OUTPUT = f.read()
+    assert OUTPUT == table.get_table()
+
+
 def test_align_validate_length():
     with pytest.raises(
         ValueError,
@@ -43,6 +57,11 @@ def test_align_validate_input_complicated():
         match="Aligns must be a tuple of 'l', 'r' and 'c' for left, right and centre. Found gdfgsd instead",
     ):
         table = MDTable(INPUT, aligns=("l", "gdfgsd", "f"))
+
+
+def test_align_padding():
+    with pytest.raises(ValueError, match="Cannot use aligns with 0 padding."):
+        table = MDTable(INPUT, padding=0, aligns=("c", "r", "l"))
 
 
 def test_handle_aligns_default():
@@ -73,7 +92,7 @@ def test_save_file_contents():
 def test_get_max_word_col():
     table = MDTable(INPUT)
     correct = {0: 17, 1: 15, 2: 14}
-    assert table._get_max_word_per_col() == correct  # pylint: disable=protected-access
+    assert table._word_length_dict == correct  # pylint: disable=protected-access
 
 
 def test_imports():
